@@ -1,0 +1,317 @@
+/*
+===================================================================================================
+MIXINS
+===================================================================================================
+*/
+
+/* CROSS BROWSING PREFIX
+**************************************************************************************************/
+@mixin prefix($property, $value) {
+  -webkit-#{$property}: #{$value};
+  -moz-#{$property}: #{$value};
+  -ms-#{$property}: #{$value};
+  -o-#{$property}: #{$value};
+  #{$property}: #{$value};
+}
+
+/* OPACITY
+**************************************************************************************************/
+@mixin opacity($value) {
+  $IEValue: $value*100;
+  opacity: $value;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity="+$IEValue+")";
+  filter: alpha(opacity= $IEValue);
+  -khtml-opacity: $value;
+  -moz-opacity:$value;
+  -webkit-opacity:$value;
+}
+
+/* BORDER RADIUS
+**************************************************************************************************/
+@mixin border-radius($radius) { @include prefix('border-radius', $radius); }
+
+/* BORDER PART RADIUS
+**************************************************************************************************/
+@mixin border-radius-part($top-left-radius, $top-right-radius, $bottom-left-radius, $bottom-right-radius) {
+   @include prefix('border-top-left-radius', $top-left-radius);
+   @include prefix('border-top-right-radius', $top-right-radius);
+   @include prefix('border-bottom-left-radius', $bottom-left-radius);
+   @include prefix('border-bottom-right-radius', $bottom-right-radius);
+}
+
+/* BACKGROUND SIZE
+**************************************************************************************************/
+@mixin background-size($size) { @include prefix('background-size', $size); }
+
+
+/* FLEXBOX
+**************************************************************************************************/
+@mixin flexbox { display: -webkit-box; display: -webkit-flex; display: -moz-box; display: -ms-flexbox; display: flex; }
+
+/* ------------- ALIGN ITEMS ------------- */
+@mixin align-items($align-items: stretch) {
+	@if $align-items == flex-start {
+		-webkit-box-align: start;
+		-ms-flex-align: start;
+	} @else if $align-items == flex-end {
+		-webkit-box-align: end;
+		-ms-flex-align: end;
+	} @else {
+		-webkit-box-align: $align-items;
+		-ms-flex-align: $align-items;
+	}
+	-webkit-align-items: $align-items;
+	-moz-align-items: $align-items;
+	align-items: $align-items;
+}
+
+/* ------------- JUSTIFY CONTENT ------------- */
+@mixin justify-content($justify-content: flex-start) {
+	@if $justify-content == flex-start {
+		-webkit-box-pack: start;
+		-ms-flex-pack: start;
+	} @else if $justify-content == flex-end {
+		-webkit-box-pack: end;
+		-ms-flex-pack: end;
+	} @else if $justify-content == space-between {
+		-webkit-box-pack: justify;
+		-ms-flex-pack: justify;
+	} @else if $justify-content == space-around {
+		-ms-flex-pack: distribute;
+	} @else {
+		-webkit-box-pack: $justify-content;
+		-ms-flex-pack: $justify-content;
+	}
+	-webkit-justify-content: $justify-content;
+	-moz-justify-content: $justify-content;
+	justify-content: $justify-content;
+}
+
+/* ------------- FLEX DIRECTION ------------- */
+@mixin flex-direction($flex-direction: row) {
+	@if $flex-direction == row-reverse {
+		-webkit-box-direction: reverse;
+		-webkit-box-orient: horizontal;
+	} @else if $flex-direction == column {
+		-webkit-box-direction: normal;
+		-webkit-box-orient: vertical;
+	} @else if $flex-direction == column-reverse {
+		-webkit-box-direction: reverse;
+		-webkit-box-orient: vertical;
+	} @else {
+		-webkit-box-direction: normal;
+		-webkit-box-orient: horizontal;
+	}
+	-webkit-flex-direction: $flex-direction;
+	-moz-flex-direction: $flex-direction;
+	-ms-flex-direction: $flex-direction;
+	flex-direction: $flex-direction;
+}
+
+/* ------------- FLEX WRAP ------------- */
+@mixin flex-wrap($flex-wrap: nowrap) {
+	-webkit-flex-wrap: $flex-wrap;
+	-moz-flex-wrap: $flex-wrap;
+	@if $flex-wrap == nowrap {
+		-ms-flex-wrap: none;
+	} @else {
+		-ms-flex-wrap: $flex-wrap;
+	}
+	flex-wrap: $flex-wrap;
+}
+
+/* ------------- ORDER ------------- */
+@mixin order($order: 0) {
+	-webkit-box-ordinal-group: $order + 1;
+	-webkit-order: $order;
+	-moz-order: $order;
+	-ms-flex-order: $order;
+	order: $order;
+}
+
+/* ------------- FLEX GROW ------------- */
+@mixin flex-grow($flex-grow: 0) {
+	-webkit-box-flex: $flex-grow;
+	-webkit-flex-grow: $flex-grow;
+	-moz-flex-grow: $flex-grow;
+	-ms-flex-positive: $flex-grow;
+	flex-grow: $flex-grow;
+}
+
+/* ------------- FLEX SHRINK------------- */
+@mixin flex-shrink($flex-shrink: 0) {
+  -webkit-flex-shrink: $flex-shrink;
+  -moz-flex-shrink: $flex-shrink;
+  -ms-flex-shrink: $flex-shrink;
+  flex-shrink: $flex-shrink;
+}
+
+/* ------------- FLEX BASIS ------------- */
+@mixin flex-basis($flex-basis: auto) {
+	-webkit-flex-basis: $flex-basis;
+	-moz-flex-basis: $flex-basis;
+	-ms-flex-preferred-size: $flex-basis;
+	flex-basis: $flex-basis;
+}
+
+/* ------------- ALIGN SELF ------------- */
+@mixin align-self($align-slef: auto) {
+	-webkit-align-self: $align-slef;
+	-moz-align-self: $align-slef;
+	@if $align-slef == flex-start {
+		-ms-flex-item-align: start;
+	} @else if $align-slef == flex-end {
+		-ms-flex-item-align: end;
+	} @else {
+		-ms-flex-item-align: $align-slef;
+	}
+	align-self: $align-slef;
+}
+
+/* ------------- ALIGN CONTENT ------------- */
+@mixin align-content ($align-content:auto) {
+   @if $align-content == flex-start {
+     -ms-flex-line-pack: start;
+   } @else if $align-content == flex-end {
+     -ms-flex-line-pack: end;
+   } @else if $align-content == space-between {
+     -ms-flex-line-pack: justify;
+   } @else if $align-content == space-around {
+     -ms-flex-line-pack: distribute;
+   } @else {
+     -ms-flex-line-pack: $align-content;
+   }
+   -webkit-align-content: $align-content;
+      -moz-align-content: $align-content;
+           align-content: $align-content;
+}
+
+/* CALC
+**************************************************************************************************/
+@mixin calc($property, $expression) {
+  #{$property}: -webkit-calc(#{$expression});
+  #{$property}: -moz-calc(#{$expression});
+  #{$property}: -o-calc(#{$expression});
+  #{$property}: calc(#{$expression});
+}
+
+/* OVERFLOW WRAP
+**************************************************************************************************/
+@mixin overflow-wrap {
+  word-break:break-word;
+  overflow-wrap: break-word;
+  @supports (-ms-ime-align:auto) { word-wrap:break-word;}
+  @media screen and (min-width:0\0) { word-wrap:break-word; }
+}
+
+
+/* TRANSITION
+**************************************************************************************************/
+@mixin transition($transition...){ @include prefix('transition', $transition); }
+
+/* TRANSFORM
+**************************************************************************************************/
+@mixin transform($transform) { @include prefix('transform', $transform); }
+@mixin transform-origin($transform-origin) { @include prefix('transform-origin', $transform-origin); }
+
+/* ANIMATION
+**************************************************************************************************/
+@mixin animation($animation) { @include prefix('animation', $animation); }
+@mixin animation-delay ($animation-delay) { @include prefix('animation-delay', $animation-delay); }
+@mixin animation-timing ($animation-timing) { @include prefix('animation-timing-function', $animation-timing); }
+
+/* KEYFRAMES
+**************************************************************************************************/
+@mixin keyframes($name) {
+  @-webkit-keyframes #{$name} {
+    @content;
+  }
+  @-moz-keyframes #{$name} {
+    @content;
+  }
+  @-ms-keyframes #{$name} {
+    @content;
+  }
+  @-o-keyframes #{$name} {
+    @content;
+  }
+  @keyframes #{$name} {
+    @content;
+  }
+}
+
+/* PLACEHOLDER
+**************************************************************************************************/
+@mixin placeholder ($rules) {
+  &::placeholder {@content;}
+  &:-ms-input-placeholder {@content;}
+  &::-ms-input-placeholder {@content;}
+}
+
+
+/* TRUNCATE TEXT
+**************************************************************************************************/
+@mixin truncate { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; -o-text-overflow: ellipsis; -moz-binding: url(<q>assets/xml/ellipsis.xml#ellipsis</q>);}
+
+/* SATURATION
+**************************************************************************************************/
+@mixin desaturate{ -webkit-filter: grayscale(1); -webkit-filter: grayscale(100%); -moz-filter: grayscale(100%); filter: gray; filter: grayscale(100%);}
+@mixin saturate{ -webkit-filter: grayscale(0);  -webkit-filter: grayscale(0%);  -moz-filter: grayscale(0%);  filter: none;  filter: grayscale(0%); }
+
+
+/* CROSS BROWSING
+**************************************************************************************************/
+
+/* ------------- FIREFOX 56+ ------------- */
+@mixin cross-firefox { @-moz-document url-prefix() { @content; } }
+
+/* ------------- SAFARI 7.1+  ------------- */
+@mixin cross-safari7 { _::-webkit-full-page-media, _:future, :root .safari_only { @content; } }
+
+/* ------------- SAFARI 9+  ------------- */
+@mixin cross-safari9 { @supports (-webkit-marquee-repetition:infinite) and (object-fit:fill) { @content; } }
+
+/* ------------- SAFARI 11 ------------- */
+@mixin cross-safari11 { @media not all and (min-resolution:.001dpcm) { @supports (-webkit-appearance:none) and (stroke-color:transparent) { @content; } } }
+
+/* -------------  IE 10 ------------- */
+@mixin cross-ie10 { @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) { @content; } }
+
+/* -------------  IE 11 ------------- */
+@mixin cross-ie11 { @media screen and (min-width:0\0) { @content; } }
+
+/* -------------  EDGE 12+ ------------- */
+@mixin cross-edge { @supports (-ms-ime-align:auto) { @content; } }
+
+
+
+/* RESPONSIVE
+**************************************************************************************************/
+
+/* ------------- MAX WIDTH ------------- */
+@mixin max-screen($res){
+  @media screen and (max-width: $res){
+    @content;
+  }
+}
+
+/* ------------- MAX HEIGHT ------------- */
+@mixin max-screen-height($res){
+  @media screen and (max-height: $res){
+    @content;
+  }
+}
+
+/* RETINA
+**************************************************************************************************/
+@mixin retina {
+  @media
+    only screen and (-webkit-min-device-pixel-ratio: 2),
+    only screen and (min--moz-device-pixel-ratio: 2),
+    only screen and (-o-min-device-pixel-ratio: 2/1),
+    only screen and (min-device-pixel-ratio: 2),
+    only screen and (min-resolution: 192dpi),
+    only screen and (min-resolution: 2dppx) {
+    @content;
+  }
+}
