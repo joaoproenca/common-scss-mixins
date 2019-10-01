@@ -1,7 +1,7 @@
 # SCSS/SASS Mixins collection
 
 Most common SCSS/SASS mixins, in a single file, for any project.
-Each mixin comes with an example.
+Each mixin comes with a commented implementation example (@include).
 
 
 ## Code example:

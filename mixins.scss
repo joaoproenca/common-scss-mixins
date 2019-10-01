@@ -13,6 +13,7 @@ MIXINS
   -o-#{$property}: #{$value};
   #{$property}: #{$value};
 }
+// @include prefix('border-radius', 10px);
 
 /* OPACITY
 **************************************************************************************************/
@@ -25,10 +26,13 @@ MIXINS
   -moz-opacity:$value;
   -webkit-opacity:$value;
 }
+// @include opacity(0.5);
 
 /* BORDER RADIUS
 **************************************************************************************************/
-@mixin border-radius($radius) { @include prefix('border-radius', $radius); }
+@mixin border-radius($radius) {@include prefix('border-radius', $radius);}
+
+// @include border-radius(50%);
 
 /* BORDER PART RADIUS
 **************************************************************************************************/
@@ -38,10 +42,13 @@ MIXINS
    @include prefix('border-bottom-left-radius', $bottom-left-radius);
    @include prefix('border-bottom-right-radius', $bottom-right-radius);
 }
+// @include border-radius-part (0, 2px, 0, 2px);
 
 /* BACKGROUND SIZE
 **************************************************************************************************/
 @mixin background-size($size) { @include prefix('background-size', $size); }
+
+// @include background-size(cover);
 
 
 /* FLEXBOX
@@ -64,6 +71,7 @@ MIXINS
 	-moz-align-items: $align-items;
 	align-items: $align-items;
 }
+// @include align-items(stretch);
 
 /* ------------- JUSTIFY CONTENT ------------- */
 @mixin justify-content($justify-content: flex-start) {
@@ -86,6 +94,7 @@ MIXINS
 	-moz-justify-content: $justify-content;
 	justify-content: $justify-content;
 }
+// @include justify-content(center);
 
 /* ------------- FLEX DIRECTION ------------- */
 @mixin flex-direction($flex-direction: row) {
@@ -107,6 +116,7 @@ MIXINS
 	-ms-flex-direction: $flex-direction;
 	flex-direction: $flex-direction;
 }
+// @include flex-direction (column);
 
 /* ------------- FLEX WRAP ------------- */
 @mixin flex-wrap($flex-wrap: nowrap) {
@@ -119,6 +129,7 @@ MIXINS
 	}
 	flex-wrap: $flex-wrap;
 }
+// @include flex-wrap(wrap);
 
 /* ------------- ORDER ------------- */
 @mixin order($order: 0) {
@@ -128,6 +139,7 @@ MIXINS
 	-ms-flex-order: $order;
 	order: $order;
 }
+// @include order(2);
 
 /* ------------- FLEX GROW ------------- */
 @mixin flex-grow($flex-grow: 0) {
@@ -137,6 +149,7 @@ MIXINS
 	-ms-flex-positive: $flex-grow;
 	flex-grow: $flex-grow;
 }
+// @include flex-grow (2);
 
 /* ------------- FLEX SHRINK------------- */
 @mixin flex-shrink($flex-shrink: 0) {
@@ -145,6 +158,7 @@ MIXINS
   -ms-flex-shrink: $flex-shrink;
   flex-shrink: $flex-shrink;
 }
+// @include flex-shrink (0);
 
 /* ------------- FLEX BASIS ------------- */
 @mixin flex-basis($flex-basis: auto) {
@@ -153,6 +167,7 @@ MIXINS
 	-ms-flex-preferred-size: $flex-basis;
 	flex-basis: $flex-basis;
 }
+// @include flex-basis (70%);
 
 /* ------------- ALIGN SELF ------------- */
 @mixin align-self($align-slef: auto) {
@@ -167,6 +182,7 @@ MIXINS
 	}
 	align-self: $align-slef;
 }
+// @include align-self(center);
 
 /* ------------- ALIGN CONTENT ------------- */
 @mixin align-content ($align-content:auto) {
@@ -185,6 +201,7 @@ MIXINS
       -moz-align-content: $align-content;
            align-content: $align-content;
 }
+// @include align-content (stretch);
 
 /* CALC
 **************************************************************************************************/
@@ -194,6 +211,7 @@ MIXINS
   #{$property}: -o-calc(#{$expression});
   #{$property}: calc(#{$expression});
 }
+// @include calc(width, "100% - #{40px}");
 
 /* OVERFLOW WRAP
 **************************************************************************************************/
@@ -203,22 +221,26 @@ MIXINS
   @supports (-ms-ime-align:auto) { word-wrap:break-word;}
   @media screen and (min-width:0\0) { word-wrap:break-word; }
 }
+// @include overflow-wrap;
 
 
 /* TRANSITION
 **************************************************************************************************/
-@mixin transition($transition...){ @include prefix('transition', $transition); }
+@mixin transition($transition...){ @include prefix('transition', $transition);}
+
+// @include transition( opacity 1s, visibility 1s);
 
 /* TRANSFORM
 **************************************************************************************************/
 @mixin transform($transform) { @include prefix('transform', $transform); }
-@mixin transform-origin($transform-origin) { @include prefix('transform-origin', $transform-origin); }
+
+// @include transform (translateY(-50%));
 
 /* ANIMATION
 **************************************************************************************************/
-@mixin animation($animation) { @include prefix('animation', $animation); }
-@mixin animation-delay ($animation-delay) { @include prefix('animation-delay', $animation-delay); }
-@mixin animation-timing ($animation-timing) { @include prefix('animation-timing-function', $animation-timing); }
+@mixin animation($animation) { @include prefix('animation', $animation);}
+
+// @include animation (0.8s spin linear infinite);
 
 /* KEYFRAMES
 **************************************************************************************************/
@@ -240,6 +262,8 @@ MIXINS
   }
 }
 
+// @include keyframes (loadspin)  {0% {@include transform (rotate(0deg));} 100%{@include transform (rotate(360deg));} };
+
 /* PLACEHOLDER
 **************************************************************************************************/
 @mixin placeholder ($rules) {
@@ -247,60 +271,74 @@ MIXINS
   &:-ms-input-placeholder {@content;}
   &::-ms-input-placeholder {@content;}
 }
+// @include placeholder(rules) {color: 000;};
 
 
 /* TRUNCATE TEXT
 **************************************************************************************************/
 @mixin truncate { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; -o-text-overflow: ellipsis; -moz-binding: url(<q>assets/xml/ellipsis.xml#ellipsis</q>);}
 
+// @include truncate;
+
 /* SATURATION
 **************************************************************************************************/
 @mixin desaturate{ -webkit-filter: grayscale(1); -webkit-filter: grayscale(100%); -moz-filter: grayscale(100%); filter: gray; filter: grayscale(100%);}
-@mixin saturate{ -webkit-filter: grayscale(0);  -webkit-filter: grayscale(0%);  -moz-filter: grayscale(0%);  filter: none;  filter: grayscale(0%); }
+// @include desaturate;
 
+@mixin saturate{ -webkit-filter: grayscale(0);  -webkit-filter: grayscale(0%);  -moz-filter: grayscale(0%);  filter: none;  filter: grayscale(0%);}
+// @include saturate;
 
 /* CROSS BROWSING
 **************************************************************************************************/
 
 /* ------------- FIREFOX 56+ ------------- */
 @mixin cross-firefox { @-moz-document url-prefix() { @content; } }
+// @include cross-firefox {top: 20px;};
 
 /* ------------- SAFARI 7.1+  ------------- */
 @mixin cross-safari7 { _::-webkit-full-page-media, _:future, :root .safari_only { @content; } }
+// @include cross-safari7 {top: 20px;};
 
 /* ------------- SAFARI 9+  ------------- */
 @mixin cross-safari9 { @supports (-webkit-marquee-repetition:infinite) and (object-fit:fill) { @content; } }
+// @include cross-safari9 {top: 20px;};
 
 /* ------------- SAFARI 11 ------------- */
 @mixin cross-safari11 { @media not all and (min-resolution:.001dpcm) { @supports (-webkit-appearance:none) and (stroke-color:transparent) { @content; } } }
+// @include cross-safari11 {top: 20px;};
 
 /* -------------  IE 10 ------------- */
 @mixin cross-ie10 { @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) { @content; } }
+// @include cross-ie10 {top: 20px;};
 
 /* -------------  IE 11 ------------- */
 @mixin cross-ie11 { @media screen and (min-width:0\0) { @content; } }
+// @include cross-ie11 {top: 20px;};
 
 /* -------------  EDGE 12+ ------------- */
 @mixin cross-edge { @supports (-ms-ime-align:auto) { @content; } }
+// @include cross-edge {top: 20px;};
 
 
 
 /* RESPONSIVE
 **************************************************************************************************/
 
-/* ------------- MAX WIDTH ------------- */
+/* ------------- MAX SCREEN WIDTH ------------- */
 @mixin max-screen($res){
   @media screen and (max-width: $res){
     @content;
   }
 }
+// @include max-screen(980px) {margin-left: 20px; margin-right: 20px;}
 
-/* ------------- MAX HEIGHT ------------- */
+/* ------------- MAX SCREEN HEIGHT ------------- */
 @mixin max-screen-height($res){
   @media screen and (max-height: $res){
     @content;
   }
 }
+// @include max-screen-height(480px) {margin-top: 20px; margin-bottom: 20px;}
 
 /* RETINA
 **************************************************************************************************/
@@ -315,3 +353,4 @@ MIXINS
     @content;
   }
 }
+// @include retina {max-width:200px;}
